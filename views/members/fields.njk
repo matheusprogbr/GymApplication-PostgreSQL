@@ -1,0 +1,134 @@
+        <div class="item">
+          <span>Avatar:</span>
+          <div>
+            <input 
+              type="url" 
+              name="avatar_url"
+              placeholder="https://www.imagens.com/id"
+              value="{{member.avatar_url}}"
+            >
+          </div>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Membro:</span>
+          <div>
+            <input 
+              type="text" 
+              name="name"
+              placeholder="Nome do membro"
+              autocomplete="off"
+              value="{{member.name}}"
+            >
+          </div>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Email:</span>
+          <div>
+            <input 
+              type="email" 
+              name="email"
+              placeholder="nome@exemplo.com"
+              autocomplete="off"
+              value="{{member.email}}"
+            >
+          </div>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Data de nascimento:</span>
+          <div>
+            <input 
+              type="date" 
+              name="birth"
+              value="{{member.birth}}"
+            >
+          </div>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Sexo:</span>
+          <ul class="gender-selection">
+            <li><input type="radio" name="gender" value="M" 
+            {% if member.gender == 'M' %}
+              checked
+            {% endif %}>
+            Masculino</li>
+            <li><input type="radio" name="gender" value="F"
+            {% if member.gender == 'F' %}
+              checked
+            {% endif %}>
+            Feminino</li>
+          </ul>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Tipo Sanguíneo:</span>
+          <div>
+            <select name="blood">
+              <option value="A+"
+              {% if member.blood == "A+"%}
+                selected
+              {%endif%}
+              >A+</option>
+              <option value="A-"
+              {% if member.blood == "A-"%}
+                selected
+              {%endif%}
+              >A-</option>
+              <option value="B+"
+              {% if member.blood == "B+"%}
+                selected
+              {%endif%}
+              >B+</option>
+              <option value="B-"
+              {% if member.blood == "B-"%}
+                selected
+              {%endif%}
+              >B-</option>
+              <option value="AB+"
+              {% if member.blood == "AB+"%}
+                selected
+              {%endif%}
+              >AB+</option>
+              <option value="AB-"
+              {% if member.blood == "AB-"%}
+                selected
+              {%endif%}
+              >AB-</option>
+              <option value="O+"
+              {% if member.blood == "O+"%}
+                selected
+              {%endif%}
+              >O+</option>
+              <option value="O-"
+              {% if member.blood == "O-"%}
+                selected
+              {%endif%}
+              >O-</option>
+            </select>
+          </div>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Peso(kg):</span>
+          <div>
+            <input type="number" 
+                   name="weight"
+                   value="{{member.weight}}"
+            >
+          </div>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Altura(cm):</span>
+          <div>
+            <input type="number" 
+                   name="height"
+                   value="{{member.height}}"
+            >
+          </div>
+        </div><!-- item end -->
+      
+      <button type="submit" class="form-button">Enviar</button>

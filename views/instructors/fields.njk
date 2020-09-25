@@ -1,0 +1,65 @@
+        <div class="item">
+          <span>Avatar:</span>
+          <div>
+            <input 
+              type="url" 
+              name="avatar_url"
+              placeholder="https://www.imagens.com/id"
+              value="{{instructor.avatar_url}}"
+            >
+          </div>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Instrutor:</span>
+          <div>
+            <input 
+              type="text" 
+              name="name"
+              placeholder="Nome do instrutor"
+              autocomplete="off"
+              value="{{instructor.name}}"
+            >
+          </div>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Data de nascimento:</span>
+          <div>
+            <input 
+              type="date" 
+              name="birth"
+              value="{{instructor.birth}}"
+            >
+          </div>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Sexo:</span>
+          <ul class="gender-selection">
+            <li><input type="radio" name="gender" value="M" 
+            {% if instructor.gender == 'M' %}
+              checked
+            {% endif %}>
+            Masculino</li>
+            <li><input type="radio" name="gender" value="F"
+            {% if instructor.gender == 'F' %}
+              checked
+            {% endif %}>
+            Feminino</li>
+          </ul>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Área de atuação:</span>
+          <div>
+            <input 
+              type="text" 
+              name="services"
+              placeholder="Ex:Crossfit, Musculação"
+              value="{{instructor.services}}"
+            >
+          </div>
+        </div><!-- item end -->
+      
+      <button type="submit" class="form-button">Enviar</button>

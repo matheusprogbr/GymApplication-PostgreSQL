@@ -1,0 +1,32 @@
+{% extends 'layout.njk' %}
+
+{% block content %}
+  <section class="card">
+
+    <div class="container table-container">
+      
+      <a href="/members/create" class="create-btn">Criar</a>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Membro</th>
+            <th>Acessar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for member in members %}
+            <tr>
+              <td>
+                <span style="background-image:url({{member.avatar_url}})"></span>
+                {{member.name}}
+              </td>
+              <td><a href="/members/{{member.id}}" class="see-btn">ver</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div><!-- container end -->
+  </section>
+{% endblock content %}

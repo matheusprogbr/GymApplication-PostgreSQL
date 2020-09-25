@@ -1,0 +1,455 @@
+/* IMPORTAÇÃO */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* JAVASCRIPT DOM */
+
+html.active-theme{
+  --primary-color:#121212;
+  --bg-white:#bb86fc;
+  --button-color:#bb86fc;
+  --delete-bg:#121212;
+  
+}
+
+html.active-theme .details .item ul li{
+  background-color:var(--primary-color);
+  color: #bb86fc;
+}
+
+/* ESTILOS GERAIS */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,li,a{
+  list-style: none;
+  text-decoration: none; 
+}
+
+img{
+  display: block;
+  max-width: 100%;
+}
+
+html{
+  --font-initial:'Roboto', sans-serif;
+
+  --primary-color:#7159c1;
+  --secondary-color:#F7DF1E;
+  --bg-white:#fff;
+  --color-navlinks:#7159c1;
+  --button-color:#000;
+  --delete-bg:lightcoral;
+}
+
+body{
+  background-color: var(--primary-color);
+  color: #fff;
+
+  font-family: var(--font-initial);
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100vh;
+
+}
+
+.container{
+  max-width: 760px;
+  width: 90vw;
+  margin: 0 auto;
+
+}
+
+/* HEADER */
+.header{
+  background-color: var(--bg-white);
+  max-width: 100%;
+
+  padding: 1rem 0;
+
+}
+.header-content{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.logo-container{
+  max-width: 20%;
+}
+
+.menu ul{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu ul li a{
+  position: relative;
+
+  color: var(--color-navlinks);
+
+  padding: 1rem;
+  padding-bottom: 0;
+
+  font-size: 1.125rem;
+}
+
+.menu ul li a.active{
+  font-weight: bold;
+}
+
+.menu ul li a::after{
+  content: '';
+
+  position: absolute;
+  height: 2px;
+  width: 0;
+  left: 16px;
+  bottom: 0;
+
+  background-color: var(--color-navlinks);
+}
+
+.menu ul li a:hover::after{
+  width:calc(100% - 2rem);
+
+  transition: all .3s ease-in-out;
+}
+
+.header .logo img{
+  max-width: 100px;
+}
+
+/* FOOTER */
+.footer{
+  text-align: center;
+
+  padding: 1rem 0;
+  margin-top: auto;
+}
+
+
+/* CARD */
+
+.card{
+  padding: 4rem 0;
+}
+
+.card .container{
+  background: var(--bg-white);
+
+  max-width: 500px;
+  min-height: 600px;
+  margin: 0 auto;
+
+  box-shadow: 0px 8px 6px -2px rgba(0, 0, 0, 0.3);
+
+  animation:up 1.5s forwards ease-in-out;
+
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@keyframes up{
+  0%{
+    opacity: 0;
+
+    transform: translateY(20px);
+  }
+
+  100%{
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+.card .avatar {
+  background-image: url("https://source.unsplash.com/collection/8353395/500x500");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  height: 100%;
+
+  margin-bottom: 20rem;
+}
+
+/* DETAILS */
+
+.details{
+  color:#333333;
+
+  padding: 2rem;
+}
+
+.second-details{
+  padding-top: 0;
+}
+
+.details .subtitle{
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+}
+
+.details .item{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  padding: 1rem 0;
+}
+
+.details .item:last-child{
+  border: none;
+}
+
+.details .item span:nth-child(1){
+  color: var(--primary-color);
+  
+  line-height: 1.5rem;
+}
+
+.details .item span:nth-child(2),
+.details .item ul{
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.details .item ul li{
+  padding: .5rem 1rem;
+  border-radius: 1rem;
+
+  background-color: var(--secondary-color);
+
+}
+
+.details .item ul li:nth-child(1){
+  margin-top: .5rem;
+}
+
+.details .item ul li+li{
+  margin-top: 1rem;
+}
+
+
+/* INDEX */
+.table{
+  color: var(--primary-color);
+
+  width: 100%;
+
+  border-spacing: 0;
+}
+
+.card .table-container{
+  display: block;
+
+  padding:2rem;
+}
+
+.table thead tr th{
+  text-align: left;
+}
+
+.table thead tr th:last-child,
+td:last-child{
+  text-align: center;
+}
+
+td,th{
+  padding: 1rem .5rem;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+tbody tr:last-child td{
+  border-bottom: none;
+}
+
+tbody tr td:first-child{
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+}
+
+tbody tr td:first-child span{
+  width: 48px;
+  height: 48px;
+  
+  background-position: center;
+  background-size: cover;
+
+  border-radius: 50%;
+  border: 2px solid var(--bg-white);
+  
+  box-shadow: 1px 1px 6px black;
+  
+}
+
+.see-btn,.create-btn{
+  background-color: var(--primary-color);
+  padding: .5rem 1rem;
+
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  font-size: .875rem;
+
+  color: var(--bg-white);
+
+  border-radius: .5rem;
+}
+
+.create-btn{
+  display: inline-block;
+  margin-bottom: 1rem;
+
+}
+
+/* CREATE */
+form input,select{
+  width: 100%;
+  padding: .5rem 1rem;
+  outline: none;
+
+  color: var(--primary-color);
+  font-size: 1rem;
+  font-weight: bold;
+
+  margin-bottom: 1rem;
+
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--primary-color);
+  
+}
+
+form input[type="radio"]{
+  width: initial;
+  margin-right: .5rem;
+}
+
+form input::placeholder{
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.form-button{
+  width: 100%;
+
+  border: none;
+  border-radius: .5rem;
+  background-color: var(--primary-color);
+
+  margin-top: 2rem;
+  padding: .5rem 2rem;
+
+  text-transform: uppercase;
+
+  font-weight: bold;
+  letter-spacing: .1rem;
+
+  color: var(--button-color);
+
+  cursor: pointer;
+}
+
+/* SHOW */
+.edit-btn{
+  width: 100%;
+  display: block;
+
+  border: none;
+  border-radius: .5rem;
+  background-color: var(--primary-color);
+
+  margin-top: 2rem;
+  padding: .5rem 2rem;
+
+  text-transform: uppercase;
+  text-align: center;
+
+  font-weight: bold;
+  letter-spacing: .1rem;
+
+  color: var(--button-color);
+
+  cursor: pointer;
+}
+
+/* DELETE */
+#delete-btn{
+  margin-top: 0;
+
+  background-color: var(--delete-bg);
+
+  outline: none;
+  
+}
+
+/* MEDIA QUERYS */
+@media(max-width:375px){
+
+  .header-content{
+    display: grid;
+    grid-template-columns:1fr;
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .menu ul li a::after{
+    content: none;
+  }
+
+  /* INDEX */
+
+  .table thead tr .services,
+  .table tbody tr .services{
+    display: none;
+  }
+
+  
+}
+
+@media(min-width:1024px){
+  .container{
+    max-width: 1100px;
+  }
+
+  .card .container{
+    min-height: 500px;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .card .avatar{
+    margin: 0;
+  }
+
+  .details .item{
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* INDEX */
+
+  .card .table-container{
+    display: block;
+  }
+
+  /* CREATE */
+  .details .item .gender-selection li{
+    max-width: 50%;
+  }
+
+  form input{
+    margin-bottom: 0;
+  }
+}

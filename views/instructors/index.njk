@@ -1,0 +1,39 @@
+{% extends 'layout.njk' %}
+
+{% block navlinks %}
+  <li><a href="/" class="active">Instructors</a></li>
+  <li><a href="/members">Members</a></li>
+{% endblock %}
+
+{% block content %}
+  <section class="card">
+
+    <div class="container table-container">
+
+      <a href="/instructors/create" class="create-btn">Criar</a>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Instructor</th>
+            <th class="services">Atendimento</th>
+            <th>Acessar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for instructor in instructors %}
+            <tr>
+              <td>
+                <span style="background-image:url({{instructor.avatar_url}})"></span>
+                {{instructor.name}}
+              </td>
+              <td class="services">{{instructor.services}}</td>
+              <td><a href="/instructors/{{instructor.id}}" class="see-btn">ver</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div><!-- container end -->
+  </section>
+{% endblock content %}

@@ -1,0 +1,63 @@
+{% extends 'layout.njk' %}
+
+{% block navlinks %}
+  <li><a href="/">Instructors</a></li>
+  <li><a href="/members">Members</a></li>
+{% endblock %}
+
+{% block content %}
+  <section class="card">
+
+    <div class="container">
+
+      <div class="avatar" style = "background-image: url({{member.avatar_url}})"></div>
+
+      <div class="details">
+        <h2 class="subtitle">Detalhes</h2>
+
+        <div class="item">
+          <span>Membro:</span>
+          <span>{{member.name}}</span>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Email:</span>
+          <span>{{member.email}}</span>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Idade:</span>
+          <span>{{member.age}}</span>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Aniversário:</span>
+          <span>{{member.birthDay}}</span>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Sexo:</span>
+          <span>{{member.gender}}</span>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Tipo Sanguíneo:</span>
+          <span>{{member.blood}}</span>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Peso(kg):</span>
+          <span>{{member.weight}}</span>
+        </div><!-- item end -->
+
+        <div class="item">
+          <span>Altura(cm):</span>
+          <span>{{member.height}}</span>
+        </div><!-- item end -->
+      
+      <a href="/members/{{member.id}}/edit" class="edit-btn">Editar</a>
+
+      </div><!-- details end -->
+    </div><!-- container end -->
+  </section>
+{% endblock content %}

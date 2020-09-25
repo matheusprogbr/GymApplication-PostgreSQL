@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% block head %}
+    <title>Gym Manager</title>
+  {% endblock %}
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo-container">
+        <a href="/" class="logo"><img src="/javascript.svg" alt=""></a>
+      </div><!-- logo-container end -->
+      <nav class="menu">
+        <ul>
+              <li><a href="/instructors">Instructors</a></li>
+              <li><a href="/members">Members</a></li>
+        </ul>
+      </nav>
+    </div><!-- container end -->
+  </header>
+
+  {% block content %}
+
+  {% endblock content %}
+
+  <footer class="footer">
+    <span>Feito com ❤️ by matheusprogbr</span>
+    <input type="checkbox" name="theme" id="theme">
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>
