@@ -31,7 +31,7 @@ module.exports = {
     
     Instructor.create(values,(instructor) => {
       res.redirect(`/instructors/${instructor.id}`);
-    })
+    });
 
 
   },
