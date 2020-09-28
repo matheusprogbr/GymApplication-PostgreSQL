@@ -1,8 +1,11 @@
 const {age, gender, date} = require('../../lib/utils');
+const Member = require('../models/Member');
 
 module.exports = {
   index: (req,res) => {
-    return res.render('members/index', { members:data.members });
+    Member.all((members) => {
+      res.render('members/index', { members });
+    })
   },
   create: (req,res) => {
     return res.render('members/create');
@@ -14,116 +17,87 @@ module.exports = {
         return res.send('Preencha todos os campos!');
     };
 
-    let {avatar_url,birth,name,services,gender} = req.body; // destructuring the object into variables
+    let {avatar_url,birth,name,email,gender,blood,height,weight} = req.body; // destructuring the object into variables 
 
-    birth = Date.parse(req.body.birth);
-    const created_at = Date.now(); //get actual time of the app
-    let id = 1;
-    const lastMember = data.members[data.members.length-1];
-
-    if(lastMember){
-      id = lastMember.id + 1;
-    }
-
-    data.members.push({
-      id,
-      name,
-      gender,
-      birth,
-      services,
+    const values = [
       avatar_url,
-      created_at
+      name,
+      email,
+      date(birth).iso,
+      gender,
+      weight,
+      height,
+      blood
+    ];
+    
+    Member.create(values,(member) => {
+      res.redirect(`/members/${member.id}`);
     });
 
-    fs.writeFile('data.json', JSON.stringify(data,null, 2), (err) => {
-      if(err) return res.send('Write file error!');
 
-      return res.redirect(`/members/${id}`);
-  });
-  
   },
   show: (req,res) => {
-    const { id } = req.params;
+    let { id } = req.params;
+    id = Number(id);
+    
+    Member.find(id,(member) => {
+      if(!member) return res.send('Member not found!');
 
-    const foundMember = data.members.find((member) => {
-      return id == member.id;
+      const showMember = {
+        ...member, // get all the properties of the object and copy to member, but i will rewrite some of the values
+        gender:gender(member.gender),
+        age:age(member.birth),
+        birthDay: date(member.birth).birthDay,             
+      };
+
+      return res.render('members/show',{ member:showMember });
     });
-
-    if(!foundMember) return res.send('Member not found!');
-
-    const member = {
-      ...foundMember, // get all the properties of the object and copy to member, but i will rewrite some of the values
-      gender:gender(foundMember.gender),
-      age:age(foundMember.birth),             
-      services:foundMember.services.split(','),        // rewrite the value of services
-      created_at: new Intl.DateTimeFormat('pt-BR').format(foundMember.created_at),      // rewrite the value of created_at
-    };
-
-    return res.render('members/show',{ member });
+    
   },
   edit: (req,res) => {
     const { id } = req.params;
 
-    const foundMember = data.members.find((member) => {
-      return id == member.id;
+    Member.find(id, (member) => {
+      if(!member) return res.send('Member not found!');
+
+      const newMember = {
+        ...member,
+        birth:date(member.birth).iso
+      };
+
+      return res.render('members/edit', { member:newMember }); 
     });
-  
-    if(!foundMember) return res.send('Member not found!');
-  
-    const member = {
-      ...foundMember,
-      birth:birth(foundMember.birth).iso
-    };
-  
-    return res.render('members/edit', { member });    
   },
   put: (req,res) => {
     let { id } = req.body;
-    let index = 0;
   
     const keys = Object.keys(req.body);
     for(key of keys){
       if(req.body[key] == '') return res.send('Preencha todos os campos');
     }
   
-    const foundMember = data.members.find((member, foundIndex) => {
-      if(id == member.id){
-        index = foundIndex;
-        return true;
-      }
-    });
-  
-    if(!foundMember) return res.send('Member not found!');
-  
-    const member = {
-      ...foundMember,
-      ...req.body,
-      birth: Date.parse(req.body.birth),
-      id:Number(req.body.id)
-    };
-  
-    data.members[index] = member;
-  
-    fs.writeFile('data.json', JSON.stringify(data, null , 2) , (err) => {
-      if(err) return res.send('An error ocurred in the file system!');
-  
-      return res.redirect(`/members/${id}`);
-    });
+    const values = [
+      req.body.avatar_url,
+      req.body.name,
+      req.body.email,
+      date(req.body.birth).iso,
+      req.body.gender,
+      req.body.weight,
+      req.body.height,
+      req.body.blood,
+      req.body.id
+  ];
+
+  Member.update(values,() => {
+    res.redirect(`/members/${id}`);
+  });
   
   },
   delete: (req,res) => {
     const { id } = req.body;
-
-    const filteredMembers = data.members.filter((member) => {
-      return member.id != id;
-    })
   
-    data.members = filteredMembers;
-  
-    fs.writeFile('data.json', JSON.stringify(data, null, 2), (err) => {
-      if(err) return res.send('Error!');
-  
-      return res.redirect('/members');
+    Member.delete(id,() => {
+      res.redirect('/members');
     });
-  }
+   }
 };
