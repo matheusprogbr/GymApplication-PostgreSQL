@@ -1,6 +1,5 @@
 const db = require('../config/db');
 
-
 module.exports = {
   all: (callback) => {
     const query = `SELECT * FROM members ORDER BY name ASC`;
