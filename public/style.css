@@ -263,6 +263,16 @@ td:last-child{
   text-align: center;
 }
 
+.table thead tr th:nth-child(3),
+td:nth-child(3){
+  text-align: center;
+}
+
+/* .table thead tr .index-display:nth-child(3),
+.table tbody tr .index-display:nth-child(3){
+  display: none;
+} */
+
 td,th{
   padding: 1rem .5rem;
   border-bottom: 1px solid #d9d9d9;
@@ -409,12 +419,18 @@ form input::placeholder{
 
   /* INDEX */
 
-  .table thead tr .services,
-  .table tbody tr .services{
+  .table thead tr .index-display,
+  .table tbody tr .index-display{
     display: none;
   }
 
   
+}
+
+@media(max-width: 1023px){
+  #index-alunos{
+    display: none;
+  }
 }
 
 @media(min-width:1024px){
