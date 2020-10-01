@@ -130,5 +130,24 @@
             >
           </div>
         </div><!-- item end -->
+
+       <div class="item">
+          <span>Instrutor:</span>
+          <div>
+            <select name="instructor">
+              {% for instructor in instructors %}
+              <option value="{{instructor.id}}"
+                {% if member.instructor_id == instructor.id %}
+                  selected
+                {% endif %}
+              >{{instructor.name}}
+            </option>
+            {% endfor %}
+
+            
+              
+            </select>
+          </div>
+        </div><!-- item end -->
       
       <button type="submit" class="form-button">Enviar</button>
