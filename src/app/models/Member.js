@@ -11,8 +11,8 @@ module.exports = {
     });
   },
   create: (values,callback) => {
-    const query = `INSERT INTO members (avatar_url,name,email,birth,gender,weight,height,blood) 
-                   VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    const query = `INSERT INTO members (avatar_url,name,email,birth,gender,weight,height,blood,instructor_id) 
+                   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
                    RETURNING id`;
 
     db.query(query,values, (err,results) => {
@@ -22,7 +22,9 @@ module.exports = {
     });
   },
   find: (id,callback) => {
-    const query = `SELECT * FROM members WHERE id = $1`;
+    const query = `SELECT members.*, instructors.name AS instructor_name FROM members 
+                   LEFT JOIN instructors ON (members.instructor_id = instructors.id)
+                   WHERE members.id = $1`;
 
     db.query(query,[id], (err, results) => {
       if(err) throw `DATABASE error! ${err}`;
@@ -39,8 +41,9 @@ module.exports = {
                    gender = $5,
                    weight = $6,
                    height = $7,
-                   blood = $8
-                   WHERE id = $9`
+                   blood = $8,
+                   instructor_id = $9
+                   WHERE id = $10`
 
     db.query(query,values, (err,results) => {
       if(err) throw `DATABASE error! ${err}`;
@@ -56,5 +59,14 @@ module.exports = {
 
       callback();
     })
+  },
+  instructor: (callback) => {
+    const query = `SELECT name, id FROM instructors`;
+
+    db.query(query,(err, results) => {
+      if(err) throw `DATABASE error! ${err}`;
+
+      callback(results.rows);
+    });
   }
 };

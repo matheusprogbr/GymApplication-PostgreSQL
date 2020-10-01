@@ -8,7 +8,9 @@ module.exports = {
     })
   },
   create: (req,res) => {
-    return res.render('members/create');
+    Member.instructor((instructors) => {
+      return res.render('members/create', { instructors });
+    });
   },
   post: (req,res) => {
     const keys = Object.keys(req.body);
@@ -17,7 +19,7 @@ module.exports = {
         return res.send('Preencha todos os campos!');
     };
 
-    let {avatar_url,birth,name,email,gender,blood,height,weight} = req.body; // destructuring the object into variables 
+    let {avatar_url,birth,name,email,gender,blood,height,weight,instructor} = req.body; // destructuring the object into variables 
 
     const values = [
       avatar_url,
@@ -27,7 +29,8 @@ module.exports = {
       gender,
       weight,
       height,
-      blood
+      blood,
+      instructor
     ];
     
     Member.create(values,(member) => {
@@ -65,7 +68,9 @@ module.exports = {
         birth:date(member.birth).iso
       };
 
-      return res.render('members/edit', { member:newMember }); 
+      Member.instructor((instructors) => {
+        return res.render('members/edit', { member:newMember, instructors }); 
+      });
     });
   },
   put: (req,res) => {
@@ -85,6 +90,7 @@ module.exports = {
       req.body.weight,
       req.body.height,
       req.body.blood,
+      req.body.instructor,
       req.body.id
   ];
 
