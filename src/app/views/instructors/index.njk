@@ -1,8 +1,12 @@
 {% extends 'layout.njk' %}
 
 {% block navlinks %}
-  <li><a href="/" class="active">Instructors</a></li>
-  <li><a href="/members">Members</a></li>
+  <li>
+    <a href="/" class="active">Instructors</a>
+  </li>
+  <li>
+    <a href="/members">Members</a>
+  </li>
 {% endblock %}
 
 {% block content %}
@@ -10,7 +14,14 @@
 
     <div class="container table-container">
 
-      <a href="/instructors/create" class="create-btn">Criar</a>
+      <div class="table-btns">
+        <a href="/instructors/create" class="create-btn">Criar</a>
+        <form action="/instructors" method="GET">
+          <input type="text" name="filter" id="filter" placeholder="Nome ou Atendimento" value={{ filter }}>
+
+          <button class="form-button" type="submit">Filtrar</button>
+        </form>
+      </div>
 
       <table class="table">
         <thead>
@@ -30,12 +41,15 @@
               </td>
               <td class="index-display">{{instructor.services}}</td>
               <td class="index-display" id="index-alunos">{{instructor.total_students}}</td>
-              <td><a href="/instructors/{{instructor.id}}" class="see-btn">ver</a></td>
+              <td>
+                <a href="/instructors/{{instructor.id}}" class="see-btn">ver</a>
+              </td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
 
-    </div><!-- container end -->
+    </div>
+    <!-- container end -->
   </section>
 {% endblock content %}
