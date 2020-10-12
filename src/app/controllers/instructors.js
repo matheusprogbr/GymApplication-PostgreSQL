@@ -23,30 +23,20 @@ module.exports = {
       limit,
       offset,
       callback(instructors) {
+        const pagination = {
+          total: Math.ceil(instructors[0].total / limit),
+          page
+        }
         res.render('instructors/index', {
           instructors,
-          filter
+          filter,
+          pagination
         });
       }
     };
 
     Instructor.paginate(params);
 
-    // if (filter) {
-    //   Instructor.findBy(filter, (instructors) => {
-    //     return res.render('instructors/index', {
-    //       instructors,
-    //       filter
-    //     });
-    //   });
-    // } else {
-    //   Instructor.all((instructors) => {
-    //     res.render('instructors/index', {
-    //       instructors
-    //     });
-
-    //   })
-    // }
   },
   create: (req, res) => {
     return res.render('instructors/create');
