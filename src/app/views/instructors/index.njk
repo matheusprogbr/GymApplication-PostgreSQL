@@ -17,7 +17,7 @@
       <div class="table-btns">
         <a href="/instructors/create" class="create-btn">Criar</a>
         <form action="/instructors" method="GET">
-          <input type="text" name="filter" id="filter" placeholder="Nome ou Atendimento" value={{ filter }}>
+          <input type="text" name="filter" id="filter" placeholder="Nome ou Atendimento" value={{filter}}>
 
           <button class="form-button" type="submit">Filtrar</button>
         </form>
@@ -48,6 +48,9 @@
           {% endfor %}
         </tbody>
       </table>
+
+      <div class="pagination" data-page={{pagination.page}} data-total={{pagination.total}}></div>
+      <!-- pagination end -->
 
     </div>
     <!-- container end -->
